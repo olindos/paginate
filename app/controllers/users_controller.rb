@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :up_page, only: :index
   # GET /users
   # GET /users.json
-  before_action :up_page, only: :index
+  
   def index
     @users = User.paginate(page: session[:page], per_page: 10)
   end
@@ -71,18 +71,15 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :slogan)
+      params.require(:user).permit(:name, :email, :slogan, :avatar)
     end
-end
 
- def up_page 
-   session[:page] = case 
+    def up_page 
+      session[:page] = case 
                    when params[:new_req] then session[:page]+1
                    when params[:page] then params[:page]
                    else 1
                    end
-  end
+    end
 
-  def user_params
-    params.require(:user).permit(:name, :email, :slogan, :avatar)
-  end
+end

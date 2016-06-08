@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   :large    => '-set colorspace sRGB -strip',
   :retina   => '-set colorspace sRGB -strip -sharpen 0x0.5'
 }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 	def self.search(search, page)
         paginate :per_page => 5, :page => page,
            :conditions => ['name like ?', "%#{search}%"],
