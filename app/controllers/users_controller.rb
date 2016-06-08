@@ -10,10 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def user_params
-    params.require(:user).permit(:name, :email, :slogan, :avatar)
-  end
-
+  
   def show
   end
 
